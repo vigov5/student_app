@@ -1,0 +1,118 @@
+#:kivy 1.0.9
+
+<StudentInfo>:
+    sid_input: sid_input
+    search_btn: search_btn
+    
+    name_label: name_label
+    group_label: group_label
+    note_label: note_label
+    class_label: class_label
+    birthday_label: birthday_label
+    barcode_label: barcode_label
+
+    student_img: student_img
+    
+    status_label: status_label
+    load_btn: load_btn
+
+    FloatLayout:
+        Button:
+            text: "Search"
+            pos: 10, root.top - 50
+            size_hint: 1, 1
+            size: 80, 40
+            id: search_btn
+            on_release: root.check_sid()
+
+        TextInput:
+            text: "1005"
+            multiline: False
+            id: sid_input
+            pos: 100, root.top - 50
+            size_hint: 1, 1
+            size: 160, 40
+
+        Button:
+            text: "Load"
+            pos: 270, root.top - 50
+            size_hint: 1, 1
+            size: 80, 40
+            id: load_btn
+            on_release: root.show_load()
+
+        Label:
+            text: 'N/A'
+            text_size: root.width / 4, 20
+            size: root.width / 4, 20
+            pos: 10, root.top - 100
+            id: name_label
+
+        Label:
+            text: 'N/A'
+            text_size: root.width / 4, 20
+            size: root.width / 4, 20
+            pos: 10, root.top - 130
+            id: group_label
+
+        Label:
+            text: 'N/A'
+            text_size: root.width / 4, 20
+            size: root.width / 4, 20
+            pos: 10, root.top - 160
+            id: note_label
+
+        Label:
+            text: 'N/A'
+            text_size: root.width / 4, 20
+            size: root.width / 4, 20
+            pos: 20 + root.width / 4, root.top - 100
+            id: class_label
+
+        Label:
+            text: 'N/A'
+            text_size: root.width / 4, 20
+            size: root.width / 4, 20
+            pos: 20 + root.width / 4, root.top - 130
+            id: birthday_label
+
+        Label:
+            text: 'N/A'
+            text_size: root.width / 4, 20
+            size: root.width / 4, 20
+            pos: 20 + root.width / 4, root.top - 160
+            id: barcode_label
+
+        Label:
+            text: 'Ready'
+            text_size: root.width, 20
+            size: root.width, 20
+            pos: 10, root.top - root.height + 10
+            id: status_label
+
+        Image:
+            size: root.width / 3, root.width / 3
+            pos: root.width - 10 - root.width / 3, root.top - root.width / 3 - 10
+            id: student_img
+            allow_stretch: True
+            keep_ratio: True
+
+<LoadDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+            file_encodings: ['utf-8']
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Load"
+                on_release: root.load(filechooser.path, filechooser.selection)
