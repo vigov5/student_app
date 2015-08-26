@@ -22,7 +22,7 @@ class StudentInfo(Widget):
     birthday_label = ObjectProperty(None)
     barcode_label = ObjectProperty(None)
     student_img = ObjectProperty(None)
-    
+
     barcodes = {}
 
     ws = None
@@ -86,7 +86,6 @@ class StudentInfo(Widget):
         self.birthday_label.text = str(self.ws.cell(row=row, column=4).value)
         self.group_label.text = self.ws.cell(row=row, column=5).value
         self.note_label.text = str(self.ws.cell(row=row, column=7).value)
-        print self.ws.cell(row=row, column=6).value
         self.student_img.source = self.ws.cell(row=row, column=6).value
         self.student_img.reload()
 
